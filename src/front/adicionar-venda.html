@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adicionar Venda ao Carrinho</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+
+    h1 {
+      color: orange;
+    }
+
+    input,
+    button {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Adicionar venda ao carrinho</h1>
+
+  <div id="vendas-container"></div>
+
+  <button onclick="adicionarAoCarrinho()">Adicionar vendas ao carrinho</button>
+
+  <script src="./adicionar-venda.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      carregarVendas();
+    });
+  </script>
+</body>
+
+</html>

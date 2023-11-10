@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="../controllers/vendasController.js"></script>
+  <script src="../models/Vendas.js"></script>
+  <script src="../routes/routes.js"></script>
+
+
+  <title> Cadastro de Vendas </title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+
+    h1 {
+      color: orange;
+    }
+
+    input,
+    button {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Cadastro de Vendas</h1>
+  <label for="nome">Nome:</label>
+  <input type="text" id="nome" name="nome">
+
+  <label for="quantidade"> Quantidade: </label>
+  <input type="text" id="quantidade" name="quantidade">
+
+  <button onclick="cadastrarVenda()">Cadastrar</button>
+
+  <script>
+    function cadastrarVenda() {
+      // Implemente a lógica para fazer a requisição POST aqui
+      // Utilize a API: https://api-cliente-servidor.onrender.com/vendas
+    }
+  </script>
+</body>
+
+</html>

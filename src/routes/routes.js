@@ -1,9 +1,7 @@
 import express from 'express';
 import CarrinhoController from '../controllers/carrinhoController.js';
 import PagamentoController from '../controllers/pagController.js';
-
 import VendasController from '../controllers/vendasController.js';
-
 
 const router = express.Router();
 
@@ -11,24 +9,20 @@ router.get('/carrinho', CarrinhoController.listarCarrinho);
 router.post('/carrinho/adicionar', CarrinhoController.adicionarAoCarrinho);
 router.delete('/carrinho/remover/:vendaId', CarrinhoController.removerVendaDoCarrinho);
 
-
-// Exemplo de definição de cabeçalho de cache em uma rota
-router.use('/vendas', (req, res, next) => {
-  console.log('Verificando cache para rota /vendas');
+router.use('/adicionar-venda', (req, res, next) => {
   res.setHeader('Cache-Control', 'public, max-age=3600', 'Last-Modified');
-  next(); 
+  res.setHeader('Access-Control-Allow-Origin', 'http://172.17.74.113:5500');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
 });
-
-// Rota protegida pelo middleware de cache
-router.get('/vendas', VendasController.listarVendas);
 
 // router.get('/vendas', VendasController.listarVendas);
 router.get('/vendas/:id', VendasController.listarVendasPorId);
 router.post('/vendas', VendasController.cadastrarVendas);
 router.put('/vendas/:id', VendasController.atualizarVendas);
 router.delete('/vendas/:id', VendasController.excluirVendas);
-
-
 
 router.get('/pagamento', PagamentoController.listarPagamentos)
 router.get('/pagamento/:id', PagamentoController.listarPagamentoPorId)

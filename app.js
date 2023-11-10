@@ -1,17 +1,36 @@
 import express from 'express';
-import db from './src/config/dbConnect.js'; // Importe a conexão do banco de dados
-import router from './src/routes/routes.js'; // Importe o arquivo de rotas
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from 'path';
+import db from './src/config/dbConnect.js';
+import router from './src/routes/routes.js';
+import cors from 'cors';
 
-// Iniciando o servidor e escutando uma porta:
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 db.on('error', console.error.bind(console, 'Erro de conexão'));
 db.once('open', () => {
   console.log('Conexão feita com sucesso');
 });
 
-// Passando a instância do express para utilizar as rotas:
 const app = express();
-app.use(express.json()); // Faz interpretar o que está chegando via POST ou PUT
-app.use(router); // Use o router diretamente aqui
-app.use(express.static('public'))
+
+const corsOptions = {
+  origin: 'http://localhost:5500', // ou o endereço local onde está rodando seu frontend
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
+
+app.use(express.json());
+app.use(router);
+app.use(express.static('public'));
+
+
+app.get('/adicionar-venda', (req, res) => {
+  res.sendFile(path.join(__dirname, 'src/front', 'adicionar-venda.html'));
+});
 
 export default app;
